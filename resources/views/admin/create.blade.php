@@ -22,7 +22,7 @@
     <div class="card shadow-sm border-0" style="background-color: #eeb3b3ff">
         <div class="card-body p-4">
 
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <!-- IMAGE -->
@@ -48,13 +48,15 @@
                 <!-- ART TYPE -->
                 <div class="mb-3">
                     <label for="artType" class="form-label fw-semibold">Art Type</label>
-                    <select class="form-select" id="artType" name="art_type" required>
-                        <option value="" selected disabled>Select Art Type</option>
-                        <option value="Batik">Batik</option>
-                        <option value="Calligraphy">Calligraphy</option>
-                        <option value="Ukiran">Ukiran</option>
-                        <option value="Anyaman">Anyaman</option>
+                    <select class="form-select" name="art_type" required>
+                    <option disabled selected>Select Art Type</option>
+                    <option value="Batik">Batik</option>
+                    <option value="Anyaman">Anyaman</option>
+                    <option value="Calligraphy">Calligraphy</option>
+                    <option value="Ukiran Kayu">Ukiran Kayu</option>
+                    <option value="Wau Bulan">Wau Bulan</option>
                     </select>
+
                  </div>
 
             <!-- MODE -->
@@ -86,7 +88,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="duration" class="form-label fw-semibold">Duration (minutes)</label>
-                        <input type="integer" class="form-control" id="duration" name="duration" required>
+                        <input type="number" class="form-control" id="duration" name="duration" required>
                     </div>
                 </div>
 
@@ -123,7 +125,7 @@
                 
                 <div class="d-flex justify-content-end">
 
-                    <a href="#" class="btn btn-secondary me-2 btn-cancel">
+                    <a href="{{ route('admin.index') }}" class="btn btn-secondary me-2 btn-cancel">
                         Cancel
                     </a>
                     <button type="submit" class="btn btn-primary px-4" style= "background-color: #ea990dff">

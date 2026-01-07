@@ -1,6 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\artclass;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,21 +33,20 @@ Route::get('/user/index', function () {
 
 //ADMIN ROUTES
 
-Route::get('/admin', function () {
-    return view('layouts.admin');
-});
+Route::get('/admin', [AdminController:: class, 'index'])->name('admin.index'); 
 
-Route::get('/admin/index', function () {
-    return view('admin.index');
-});
+Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.index');
 
-Route::get('/admin/create', function () {
-    return view('admin.create');
-});
+Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
 
-Route::get('/admin/edit', function () {
-    return view('admin.edit');
-});
+Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');
+
+Route::get('/admin/edit', [AdminController::class, 'edit'])->name('admin.edit');
+
+Route::put('/admin/update', [AdminController::class, 'update'])->name('admin.update');
+
+Route::delete('/admin/destroy', [AdminController::class, 'destroy'])->name('admin.destroy');
+
 
 Route::get('/admin/manage', function () {
     return view('admin.manage-user');

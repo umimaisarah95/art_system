@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('image_path');
             $table->string('class_name');
             $table->text('description');
+            $table->enum('art_type', ['Batik', 'Anyaman', 'Calligraphy', 'Ukiran Kayu', 'Wau Bulan']);
             $table->enum('mode' , ['Online', 'Physical']);
             $table->string('link')->nullable();
             $table->string('location')->nullable();

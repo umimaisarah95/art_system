@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\artclass;
+use App\Models\ArtClass;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,7 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $artclasses = artclass::all();
+        $artclasses = ArtClass::all();
         return view('admin.index', compact('artclasses'));
     }
 
@@ -35,25 +35,32 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $data = $request->validate([
-            'image_path' => 'required|string',
-            'class_name' => 'required|string',
-            'description' => 'required|string',
-            'mode' => 'required|in:Online,Physical',
-            'link' => 'nullable|string',
-            'location' => 'nullable|string',
-            'duration' => 'required|integer',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'price' => 'required|numeric',
-        ]);
+{
+    $data = $request->validate([
+        'image_path' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        'class_name' => 'required|string',
+        'description' => 'required|string',
+        'art_type' => 'required|in:Batik,Anyaman,Calligraphy,Ukiran Kayu,Wau Bulan',
+        'mode' => 'required|in:Online,Physical',
+        'link' => 'nullable|string',
+        'location' => 'nullable|string',
+        'duration' => 'required|integer',
+        'start_date' => 'required|date',
+        'end_date' => 'required|date',
+        'price' => 'required|numeric',
+    ]);
 
-        $imagePath = $request->input('image_path')->store('artclass_images', 'public');
-        artclass::create($data);
-        return redirect()->route('admin.index')->with('success', 'Art class created successfully.');
+    $data['image_path'] = $request
+        ->file('image_path')
+        ->store('artclass_images', 'public');
 
-    }
+    ArtClass::create($data);
+
+    return redirect()
+        ->route('admin.index')
+        ->with('success', 'Art class created successfully.');
+}
+
 
     /**
      * Display the specified resource.
@@ -72,7 +79,7 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(artclass $artclass)
+    public function edit(ArtClass $artclass)
     {
         return view('admin.edit', compact('artclass'));
     }
@@ -83,12 +90,13 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, artclass $artclass)
+    public function update(Request $request, ArtClass $artclass)
     {
         $request->validate([
-            'image_path' => 'required|string',
+            'image_path' => 'required|image|max:2048',
             'class_name' => 'required|string',
             'description' => 'required|string',
+            'art_type' => 'required|in:batik,anyaman,Calligraphy,Ukiran Kayu,Wau Bulan',
             'mode' => 'required|in:Online,Physical',
             'link' => 'nullable|string',
             'location' => 'nullable|string',
@@ -108,6 +116,7 @@ class AdminController extends Controller
             'image_path' => $imagePath,
             'class_name' => $request->input('class_name'),
             'description' => $request->input('description'),
+            'art_type' => $request->input('art_type'),
             'mode' => $request->input('mode'),
             'link' => $request->input('link'),
             'location' => $request->input('location'),
@@ -126,7 +135,7 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(artclass $artclass)
+    public function destroy(ArtClass $artclass)
     {
         $artclass->delete();
         return redirect()->route('admin.index')->with('success', 'Art class deleted successfully.');

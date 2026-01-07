@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class artclass extends Model
+class ArtClass extends Model
 {
+    protected $table = 'artclasses';
     protected $primaryKey = 'class_id';
     protected $fillable = [
         'image_path',
         'class_name',
         'description',
+        'art_type',
         'mode',
         'link',
         'duration',
