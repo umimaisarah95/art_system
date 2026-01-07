@@ -18,11 +18,12 @@
         background-size: cover;
         }
 
+        
         .btn {
-            background-color: #ffcc80ff;
-            color: #fff;
+            background-color: #ffb005ff;
+            color: #ffffffff;
         }
-        .btn:hover { background-color: #f7f7f7ff; color: #fff; }
+        .btn:hover { background-color: #fffbb8ff; color: #000000ff; }
 
         .btn-delete { background-color: #dc3545; color: #fff; }
         .btn-delete:hover { background-color: #e28690ff; }

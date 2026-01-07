@@ -22,6 +22,12 @@ Route::get('/user', function () {
     return view('layouts.user');
 });
 
+Route::get('/user/index', function () {
+    return view('user.index');
+});
+
+
+
 //ADMIN ROUTES
 
 Route::get('/admin', function () {

@@ -16,6 +16,7 @@
 
     </div>
 
+    
     <!-- FORM CARD -->
      
     <div class="card shadow-sm border-0" style="background-color: #eeb3b3ff">
@@ -92,19 +93,19 @@
             <!-- START/END DATE -->
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <label for="classStart" class="form-label fw-semibold">
+                    <label for="start_date" class="form-label fw-semibold">
                         Class Start Date
                     </label>
-                    <input type="date" class="form-control" id="classStart"
-                        name="class_start_date" required>
+                    <input type="date" class="form-control" id="start_date"
+                        name="start_date" required>
                 </div>
 
                 <div class="col-md-6 mb-4">
-                    <label for="classEnd" class="form-label fw-semibold">
+                    <label for="end_date" class="form-label fw-semibold">
                         Class End Date
                     </label>
-                    <input type="date" class="form-control" id="classEnd"
-                        name="class_end_date" required>
+                    <input type="date" class="form-control" id="end_date"
+                        name="end_date" required>
                 </div>
             </div>
 
