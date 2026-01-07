@@ -39,3 +39,7 @@ Route::get('/admin/create', function () {
 Route::get('/admin/edit', function () {
     return view('admin.edit');
 });
+
+Route::get('/admin/manage', function () {
+    return view('admin.manage-user');
+});

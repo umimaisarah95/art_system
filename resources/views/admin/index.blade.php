@@ -1,60 +1,74 @@
-@extends('admin.layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-@include('admin.classes.partials.class-cards')
-
 
 <div class="container mt-4">
 
-    <!-- HEADER -->
+    @if (session('success'))
+        <div class="alert alert-success shadow-sm">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <!-- PAGE HEADER -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold text-white">
-            Art Class Management
-        </h2>
+        <h2 class="fw-bold text-white">Art Class Management</h2>
         <a href="#" class="btn">
             Add Class
         </a>
     </div>
 
-    <!-- TABS -->
-    <ul class="nav nav-tabs mb-4" role="tablist">
-        <li class="nav-item">
-            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#all">
-                All Classes
-            </button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#online">
-                Online Classes
-            </button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#physical">
-                Physical Classes
-            </button>
-        </li>
-    </ul>
+    <div class="row">
 
-    <!-- TAB CONTENT -->
-    <div class="tab-content">
+        {{-- UI ONLY: replace with @foreach($classes as $class) later --}}
+        @for ($i = 1; $i <= 6; $i++)
+        <div class="col-md-4 mb-4">
 
-        <!-- ALL -->
-        <div class="tab-pane fade show active" id="all">
-            @include('admin.classes.partials.class-cards')
+            <div class="card card-soft h-100" style="background-color: #ffeed1ff">
+                <img src="https://via.placeholder.com/400x250"
+                     class="card-img-top"
+                     alt="Art Class Image">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold">
+                        Batik Painting Class
+                    </h5>
+
+                    <p class="mb-1">
+                        <strong>Mode:</strong> Online
+                    </p>
+
+                    <p class="mb-1">
+                        <strong>Duration:</strong> 120 minutes
+                    </p>
+
+                    <p class="mb-1">
+                        <strong>Price:</strong> RM 120
+                    </p>
+
+                    <p class="mb-3">
+                        <strong>Schedule:</strong>
+                        10 Aug 2026 – 15 Aug 2026
+                    </p>
+
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-sm w-100">
+                            Edit
+                        </a>
+
+                        <button class="btn btn-sm btn-delete w-100">
+                            Delete
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
-
-        <!-- ONLINE -->
-        <div class="tab-pane fade" id="online">
-            @include('admin.classes.partials.class-cards-online')
-        </div>
-
-        <!-- PHYSICAL -->
-        <div class="tab-pane fade" id="physical">
-            @include('admin.classes.partials.class-cards-physical')
-        </div>
+        @endfor
 
     </div>
-
 </div>
 
 @endsection

@@ -22,7 +22,7 @@
             background-color: #ffb005ff;
             color: #ffffffff;
         }
-        .btn:hover { background-color: #f7f7f7ff; color: #fff; }
+        .btn:hover { background-color: #fffbb8ff; color: #000000ff; }
 
         .btn-delete { background-color: #dc3545; color: #fff; }
         .btn-delete:hover { background-color: #e28690ff; }
@@ -80,7 +80,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Manage Class</a>
+                    <a class="nav-link" href="#">Manage Users</a>
                 </li>
 
                 <li class="nav-item">
