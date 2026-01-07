@@ -19,8 +19,8 @@
         }
 
         .btn {
-            background-color: #ffcc80ff;
-            color: #fff;
+            background-color: #ffb005ff;
+            color: #ffffffff;
         }
         .btn:hover { background-color: #f7f7f7ff; color: #fff; }
 

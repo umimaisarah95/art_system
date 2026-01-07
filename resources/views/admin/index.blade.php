@@ -1,78 +1,60 @@
-@extends('layouts.admin')
+@extends('admin.layouts.app')
 
-@section
+@section('content')
+@include('admin.classes.partials.class-cards')
+
 
 <div class="container mt-4">
 
-    @if (session('success'))
-        <div class="alert alert-success shadow-sm">
-            {{ session('success') }}
-        </div>
-    @endif
-
+    <!-- HEADER -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold">Art Class Management</h2>
+        <h2 class="fw-bold text-white">
+            Art Class Management
+        </h2>
         <a href="#" class="btn">
             Add Class
         </a>
     </div>
 
-    <div class="movie-grid">
+    <!-- TABS -->
+    <ul class="nav nav-tabs mb-4" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#all">
+                All Classes
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#online">
+                Online Classes
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#physical">
+                Physical Classes
+            </button>
+        </li>
+    </ul>
 
-        @foreach ($movies as $movie)
-        <div class="movie-card-item">
+    <!-- TAB CONTENT -->
+    <div class="tab-content">
 
-            <img src="{{ Storage::url($movie->image_path) }}" alt="Movie Poster">
-
-            <div class="movie-card-body">
-
-                <div class="movie-title">
-                    {{ $movie->movie_title }}
-                </div>
-
-                <div class="movie-meta mb-2">
-                    @php
-                        $hours = intdiv($movie->duration, 60);
-                        $minutes = $movie->duration % 60;
-                    @endphp
-
-                    Duration:
-                    {{ $hours > 0 ? $hours . 'h ' : '' }}
-                    {{ $minutes }}m
-                </div>
-
-                <!-- <div class="movie-meta">
-                    {{ $movie->promotion_start_date }} → {{ $movie->promotion_end_date }}
-                </div> -->
-
-                <div class="movie-actions mt-3">
-                    <!-- DETAILS -->
-                    <a href="{{ route('admin.movie.details', $movie->movie_id) }}" class="btn btn-sm">
-                        Details
-                    </a>
-
-                    <!-- EDIT -->
-                    <a href="{{ route('movie.edit', $movie) }}" class="btn btn-sm">
-                        Edit
-                    </a>
-                </div>
-
-                <form action="{{ route('movie.destroy', $movie) }}" method="POST" class="mt-2">
-                    @csrf
-                    @method('DELETE')
-                    <button 
-                        type="submit" 
-                        class="btn btn-sm btn-danger w-100 btn-delete"
-                        onclick="return confirm('Are you sure?')">
-                        Delete
-                    </button>
-                </form>
-
-            </div>
+        <!-- ALL -->
+        <div class="tab-pane fade show active" id="all">
+            @include('admin.classes.partials.class-cards')
         </div>
-        @endforeach
+
+        <!-- ONLINE -->
+        <div class="tab-pane fade" id="online">
+            @include('admin.classes.partials.class-cards-online')
+        </div>
+
+        <!-- PHYSICAL -->
+        <div class="tab-pane fade" id="physical">
+            @include('admin.classes.partials.class-cards-physical')
+        </div>
 
     </div>
+
 </div>
 
 @endsection

@@ -75,36 +75,41 @@
         <div class="collapse navbar-collapse" id="custNavbar">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Dashboard</a>
-                </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Dashboard</a>
+    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Manage Class</a>
-                </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Browse Classes</a>
+    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">My Classes</a>
+    </li>
 
-                @auth
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        {{ Auth::user()->name }}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">My Account</a></li>
-                        <li>
-                            <form action="#" method="POST">
-                                @csrf
-                                <button class="dropdown-item text-danger">Logout</button>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-                @endauth
+    <li class="nav-item">
+        <a class="nav-link" href="#">Profile</a>
+    </li>
 
-            </ul>
+    @auth
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            {{ Auth::user()->name }}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">My Account</a></li>
+            <li>
+                <form method="POST" action="#">
+                    @csrf
+                    <button class="dropdown-item text-danger">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </li>
+    @endauth
+
+</ul>
+
         </div>
     </div>
 </nav>

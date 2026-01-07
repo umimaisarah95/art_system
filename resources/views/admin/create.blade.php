@@ -5,12 +5,18 @@
 
     <!-- PAGE TITLE -->
     <div class="mb-4">
-        <h3 class="fw-bold" style= "color: #ffffffff, size: 20">Add Art Class</h3>
-        <p class="mb-0" style= "color: #ffffffff">Add a new art class to the system</p>
+        <h3 class="fw-bold" style="color: #ffffff; font-size: 32px;">
+    Add Art Class
+</h3>
+
+<p class="mb-0" style="color: #ffffff; font-size: 18px;">
+    Add a new art class to the system
+</p>
+
     </div>
 
     <!-- FORM CARD -->
-     <body class="bg-light">
+     
     <div class="card shadow-sm border-0" style="background-color: #eeb3b3ff">
         <div class="card-body p-4">
 
