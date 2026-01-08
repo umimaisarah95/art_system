@@ -51,6 +51,11 @@ class UserController extends Controller
 //when user register to certain class, it will update the pivot table!//
     public function registerClass($id)
     {
+        // check if user is authenticated
+        if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'Please login first.');
+        }
+        
         $user = Auth::user();
 
         // prevent duplicate registration
@@ -65,6 +70,10 @@ class UserController extends Controller
 
     public function myClasses()
     {
+        if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'Please login first.');
+        }
+        
         $user = Auth::user();
 
         // get classes registered by this user

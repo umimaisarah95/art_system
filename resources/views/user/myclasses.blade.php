@@ -7,14 +7,15 @@
 <div class="container my-5">
 
     <!-- PAGE HEADER -->
-    <div class="mb-4">
-        <h2 class="fw-bold text-white">
-            My Classes
-        </h2>
-        <p class="text-white mb-0">
-            Registered Class
-        </p>
-    </div>
+        <div class="mb-5 text-center">
+            <h1 class="fw-bold text-white display-4">
+                My Classes
+            </h1>
+            <p class="text-white fs-5 mb-0">
+                Have fun!
+            </p>
+        </div>
+
 
     @if ($classes->isEmpty())
         <div class="alert alert-warning text-center">

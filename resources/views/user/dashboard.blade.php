@@ -5,12 +5,15 @@
 <div class="container mt-4">
 
     <!-- PAGE HEADER -->
-    <div class="mb-4">
-        <h2 class="fw-bold text-white">Available Art Classes</h2>
-        <p class="text-white mb-0">
+
+    <div class="mb-5 text-center">
+        <h1 class="fw-bold text-white display-4">
+            Available Art Classes
+        </h1>
+        <p class="text-white fs-5 mb-0">
             Explore and register for traditional art classes
         </p>
-    </div>
+        </div>
 
     <div class="row">
 
