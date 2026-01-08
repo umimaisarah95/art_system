@@ -17,12 +17,27 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $table = 'users';
+    protected $primaryKey = 'user_id';
     protected $fillable = [
-        'name',
+        'full_name',
+        'age',
+        'gender',
         'email',
         'password',
         'role',
     ];
+
+    // Schema::create('users', function (Blueprint $table) {
+    //     $table->id('user_id');
+    //     $table->string('full_name');
+    //     $table->integer('age');
+    //     $table->enum('gender', ['Male', 'Female']);
+    //     $table->string('email')->unique();
+    //     $table->string('password');
+    //     $table->enum('role', ['admin', 'user'])->default('user');
+    //     $table->timestamps();
 
     /**
      * The attributes that should be hidden for serialization.

@@ -20,6 +20,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//AUTH ROUTES
+Route::get('/register', [AuthController:: class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'registerStore'])->name('register.store');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'loginStore'])->name('login.store');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 //USER ROUTES
 Route::get('/user', function () {
     return view('layouts.user');
@@ -34,8 +41,6 @@ Route::get('/user/index', function () {
 //ADMIN ROUTES
 
 Route::get('/admin', [AdminController:: class, 'index'])->name('admin.index'); 
-
-Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.index');
 
 Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
 
