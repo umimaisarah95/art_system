@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ArtClass;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -131,4 +132,12 @@ class AdminController extends Controller
         $artclass->delete();
         return redirect()->route('admin.index')->with('success', '1 Art class deleted successfully.');
     }
+
+public function userList()
+{
+    $users = User::with('classes')->get();
+
+    return view('admin.manage-user', compact('users'));
+}
+
 }

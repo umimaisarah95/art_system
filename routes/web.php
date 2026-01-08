@@ -52,6 +52,6 @@ Route::get('/admin/edit/{artclass}', [AdminController::class, 'edit'])->name('ad
 Route::put('/admin/update/{artclass}', [AdminController::class, 'update'])->name('admin.update');
 
 Route::delete('/admin/destroy/{artclass}', [AdminController::class, 'destroy'])->name('admin.destroy'); 
-Route::get('/admin/manage', function () {
-    return view('admin.manage-user');
-});
+
+
+Route::get('/admin/manage', [AdminController::class, 'userList'])->name('admin.manage');

@@ -33,26 +33,25 @@
                     </thead>
 
                     <tbody>
-
-                        {{-- UI ONLY --}}
-                        @for ($i = 1; $i <= 8; $i++)
+                    @foreach ($users as $user)
+                    @foreach ($user->classes as $class)
                         <tr class="text-center align-middle">
-                            <td>U00{{ $i }}</td>
-                            <td>Nur Aina Izzati</td>
-                            <td>aina@example.com</td>
-                            <td>C00{{ rand(1,5) }}</td>
-                            <td>Batik Painting Class</td>
+                            <td>{{ $user->user_id }}</td>
+                            <td>{{ $user->full_name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $class->class_id }}</td>
+                            <td>{{ $class->class_name }}</td>
                             <td>
-                                @if ($i % 2 == 0)
-                                    <span class="badge bg-primary">Online</span>
-                                @else
-                                    <span class="badge bg-success">Physical</span>
-                                @endif
+                                <span class="badge 
+                                    {{ $class->mode === 'Online' ? 'bg-primary' : 'bg-success' }}">
+                                    {{ $class->mode }}
+                                </span>
                             </td>
                         </tr>
-                        @endfor
+                    @endforeach
+                    @endforeach
+                </tbody>
 
-                    </tbody>
 
                 </table>
             </div>

@@ -80,7 +80,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Manage Users</a>
+                    <a class="nav-link" href="{{ route('admin.manage') }}">Manage Users</a>
                 </li>
 
                 <li class="nav-item">

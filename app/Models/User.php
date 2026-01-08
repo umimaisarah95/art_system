@@ -29,6 +29,18 @@ class User extends Authenticatable
         'role',
     ];
 
+    //TO LINK THE TABLE!!!!!! USER AND ART CLASS//
+    public function classes()
+{
+    return $this->belongsToMany(
+        ArtClass::class,
+        'class_user',
+        'user_id',
+        'class_id'
+    );
+}
+
+
     // Schema::create('users', function (Blueprint $table) {
     //     $table->id('user_id');
     //     $table->string('full_name');

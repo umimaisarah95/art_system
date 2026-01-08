@@ -22,7 +22,24 @@ class ArtClass extends Model
         'end_date',
         'price',
     ];
+
+    //TO LINK THE TABLE!!!!!! USER AND ART CLASS//
+
+    public function users()
+{
+    return $this->belongsToMany(
+        User::class,
+        'class_user',
+        'class_id',
+        'user_id'
+    );
 }
+}
+
+
+
+
+
 
 //             $table->id('class_id');
 //             $table->string('image_path');
