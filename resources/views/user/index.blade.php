@@ -48,8 +48,8 @@
         <div class="col-md-6 mb-4">
             <div class="card card-soft p-4">
                 <h5 class="fw-bold">My Classes</h5>
-                <p class="fs-2 mb-0">2</p>
-                <a href="#" class="btn btn-lg px-5">
+                <p class="fs-2 mb-0">{{ $ }}</p>
+                <a href="{{ route('user.myclasses') }}" class="btn btn-lg px-5">
             My Classes
         </a>
             </div>

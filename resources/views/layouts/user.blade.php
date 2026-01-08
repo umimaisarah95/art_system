@@ -85,7 +85,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="#">My Classes</a>
+        <a class="nav-link" href="{{ route('user.myclasses') }}">My Classes</a>
     </li>
 
     <li class="nav-item">

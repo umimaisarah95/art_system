@@ -20,8 +20,9 @@ class UserController extends Controller
     public function index()
     {
          $totalClasses = ArtClass::count();
+         $myClassCount = Auth::user()->classes()->count();
 
-    return view('user.index', compact('totalClasses'));
+    return view('user.index', compact('totalClasses', 'myClassCount'));
     }
     public function dashboard()
     {
@@ -35,7 +36,16 @@ class UserController extends Controller
     {
         $artclass = ArtClass::findOrFail($id);
 
-        return view('user.class-details', compact('artclass'));
+         $isRegistered = false;
+
+        if (Auth::check()) {
+            $isRegistered = Auth::user()
+            ->classes()
+            ->where('artclasses.class_id', $id)
+            ->exists();
+            }
+
+         return view('user.class-details', compact('artclass', 'isRegistered'));
     }
 
 //when user register to certain class, it will update the pivot table!//
@@ -51,6 +61,16 @@ class UserController extends Controller
         // Simulated payment success
         return redirect()->route('user.dashboard')
             ->with('success', 'Payment successful. You are registered for the class!');
+    }
+
+    public function myClasses()
+    {
+        $user = Auth::user();
+
+        // get classes registered by this user
+        $classes = $user->classes;
+
+        return view('user.myclasses', compact('classes'));
     }
 
 

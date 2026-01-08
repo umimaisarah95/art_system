@@ -4,107 +4,99 @@
 
 @section('content')
 
-<div class="container my-5">
+<div class="row justify-content-center">
 
-    <!-- PAGE HEADER -->
-    <div class="mb-4">
-        <h2 class="fw-bold text-white">
-            {{ $artclass->class_name }}
-        </h2>
-        <p class="text-white mb-0">
-            Learn more about this traditional art class
-        </p>
-    </div>
+    <div class="col-md-8">
 
-    <div class="row">
+        <div class="card card-soft shadow-sm" style="background-color: #ffeed1ff">
 
-        <!-- LEFT: IMAGE -->
-        <div class="col-md-6 mb-4">
-            <div class="card card-soft h-100">
-                <img src="{{ asset('storage/' . $artclass->image_path) }}"
-                     class="card-img-top"
-                     style="height: 350px; object-fit: cover;"
-                     alt="Art Class Image">
-            </div>
-        </div>
+            <!-- IMAGE -->
+            <img src="{{ asset('storage/' . $artclass->image_path) }}"
+                 class="card-img-top"
+                 style="height: 380px; object-fit: cover;"
+                 alt="Art Class Image">
 
-        <!-- RIGHT: DETAILS -->
-        <div class="col-md-6">
-            <div class="card card-soft h-100" style="background-color: #ffeed1ff">
-                <div class="card-body">
+            <!-- CARD BODY -->
+            <div class="card-body p-4">
 
-                    <h5 class="fw-bold mb-3">Class Information</h5>
+                <h4 class="fw-bold mb-3">
+                    {{ $artclass->class_name }}
+                </h4>
 
+                <p class="mb-3">
+                    {{ $artclass->description }}
+                </p>
+
+                <p>
+                    <strong>Art Type:</strong>
+                    {{ $artclass->art_type }}
+                </p>
+
+                <p>
+                    <strong>Mode:</strong>
+                    <span class="badge {{ $artclass->mode === 'Online' ? 'bg-primary' : 'bg-success' }}">
+                        {{ $artclass->mode }}
+                    </span>
+                </p>
+
+                @if ($artclass->mode === 'Online')
                     <p>
-                        <strong>Description:</strong><br>
-                        {{ $artclass->description }}
-                    </p>
-
-                    <p>
-                        <strong>Art Type:</strong>
-                        {{ $artclass->art_type }}
-                    </p>
-
-                    <p>
-                        <strong>Mode:</strong>
-                        <span class="badge {{ $artclass->mode === 'Online' ? 'bg-primary' : 'bg-success' }}">
-                            {{ $artclass->mode }}
-                        </span>
-                    </p>
-
-                    @if ($artclass->mode === 'Online')
-                        <p>
-                            <strong>Online Link:</strong><br>
-                            <a href="{{ $artclass->link }}" target="_blank">
-                                {{ $artclass->link }}
-                            </a>
-                        </p>
-                    @else
-                        <p>
-                            <strong>Location:</strong><br>
-                            {{ $artclass->location }}
-                        </p>
-                    @endif
-
-                    <p>
-                        <strong>Duration:</strong>
-                        {{ $artclass->duration }} minutes
-                    </p>
-
-                    <p>
-                        <strong>Schedule:</strong><br>
-                        {{ $artclass->start_date }} – {{ $artclass->end_date }}
-                    </p>
-
-                    <p class="fs-5 fw-bold">
-                        Price: RM{{ number_format($artclass->price, 2) }}
-                    </p>
-
-                    <!-- ACTION BUTTONS -->
-                    <div class="d-flex gap-2 mt-4">
-
-                        <a href="{{ route('user.dashboard') }}"
-                           class="btn btn-cancel w-50">
-                            Back
+                        <strong>Online Link:</strong><br>
+                        <a href="{{ $artclass->link }}" target="_blank">
+                            {{ $artclass->link }}
                         </a>
+                    </p>
+                @else
+                    <p>
+                        <strong>Location:</strong><br>
+                        {{ $artclass->location }}
+                    </p>
+                @endif
 
-                        <form action="{{ route('class.register', $artclass->class_id) }}"
-                              method="POST"
-                              class="w-50">
+                <p>
+                    <strong>Duration:</strong>
+                    {{ $artclass->duration }} minutes
+                </p>
+
+                <p>
+                    <strong>Schedule:</strong><br>
+                    {{ $artclass->start_date }} – {{ $artclass->end_date }}
+                </p>
+
+                <p class="fs-5 fw-bold mt-3">
+                    Price: RM{{ number_format($artclass->price, 2) }}
+                </p>
+
+                <!-- ACTION AREA -->
+                <div class="mt-4 d-flex flex-column gap-2">
+
+                    @if ($isRegistered)
+                        <div class="alert alert-success text-center fw-semibold mb-0">
+                            ✅ Payment Successful <br>
+                            You are registered in this class
+                        </div>
+
+                    @else
+                        <form action="{{ route('class.register', $artclass->class_id) }}" method="POST">
                             @csrf
-                            <button type="submit"
-                                    class="btn btn-success w-100">
+                            <button type="submit" class="btn btn-primary w-100">
                                 Register & Pay
                             </button>
                         </form>
+                    @endif
 
-                    </div>
+                    <a href="{{ route('user.dashboard') }}"
+                       class="btn btn-cancel">
+                        Back
+                    </a>
 
                 </div>
+
             </div>
         </div>
 
     </div>
 </div>
+
 
 @endsection

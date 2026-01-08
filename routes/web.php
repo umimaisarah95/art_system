@@ -39,6 +39,7 @@ Route::get('/class/{id}', [UserController::class, 'details'])->name('class.detai
 
 Route::post('/class/register/{id}', [UserController::class, 'registerClass'])->name('class.register');
 
+Route::get('/user/myclasses', [UserController::class, 'myClasses'])->name('user.myclasses');
 
 //ADMIN ROUTES
 
