@@ -88,9 +88,7 @@
         <a class="nav-link" href="{{ route('user.myclasses') }}">My Classes</a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="#">Profile</a>
-    </li>
+
 
     @auth
     <li class="nav-item dropdown">
@@ -98,9 +96,7 @@
             {{ Auth::user()->name }}
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">My Account</a></li>
-            <li>
-                <form method="POST" action="#">
+                <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button class="dropdown-item text-danger">Logout</button>
                 </form>

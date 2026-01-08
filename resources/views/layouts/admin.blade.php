@@ -76,16 +76,17 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.index') }}">Dashboard</a>
+                    <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.index') }}">View Class</a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.manage') }}">Manage Users</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
 
                 @auth
                 <li class="nav-item dropdown">
@@ -93,7 +94,7 @@
                         {{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">My Account</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.profile') }}">My Account</a></li>
                         <li>
                             <form action="#" method="POST">
                                 @csrf

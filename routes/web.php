@@ -41,9 +41,13 @@ Route::post('/class/register/{id}', [UserController::class, 'registerClass'])->n
 
 Route::get('/user/myclasses', [UserController::class, 'myClasses'])->name('user.myclasses');
 
+Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
+
 //ADMIN ROUTES
 
-Route::get('/admin', [AdminController:: class, 'index'])->name('admin.index'); 
+Route::get('/admin/index', [AdminController:: class, 'index'])->name('admin.index'); 
+
+Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
 Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
 
@@ -56,3 +60,5 @@ Route::put('/admin/update/{artclass}', [AdminController::class, 'update'])->name
 Route::delete('/admin/destroy/{artclass}', [AdminController::class, 'destroy'])->name('admin.destroy'); 
 
 Route::get('/admin/manage', [AdminController::class, 'userList'])->name('admin.manage');
+
+Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');

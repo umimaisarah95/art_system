@@ -30,6 +30,13 @@ class UserController extends Controller
         return view('user.dashboard', compact('artclasses'));
     }
 
+    public function profile()
+    {
+        $user = Auth::user();
+
+        return view('user.profile', compact('user'));
+    }
+
     
     //TO ENSURE THE DETAILS OF CERTAIN CLASS//
     public function details($id)

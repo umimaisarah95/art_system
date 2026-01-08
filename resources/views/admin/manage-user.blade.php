@@ -19,9 +19,9 @@
         <div class="card-body p-0">
 
             <div class="table-responsive">
-                <table class="table table-hover mb-0">
+                <table class="table table-hover table-striped mb-0">
 
-                    <thead>
+                    <thead style="background-color: #431919ff; color:white;">
                         <tr class="text-center align-middle">
                             <th>User ID</th>
                             <th>Full Name</th>
@@ -33,27 +33,30 @@
                     </thead>
 
                     <tbody>
-                    @foreach ($users as $user)
-                    @foreach ($user->classes as $class)
-                        <tr class="text-center align-middle">
-                            <td>{{ $user->user_id }}</td>
-                            <td>{{ $user->full_name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $class->class_id }}</td>
-                            <td>{{ $class->class_name }}</td>
-                            <td>
-                                <span class="badge 
-                                    {{ $class->mode === 'Online' ? 'bg-primary' : 'bg-success' }}">
-                                    {{ $class->mode }}
-                                </span>
-                            </td>
-                        </tr>
-                    @endforeach
-                    @endforeach
-                </tbody>
+                        @foreach ($users as $user)
+                            @foreach ($user->classes as $class)
+                                <tr class="text-center align-middle 
+                                    {{ $class->mode === 'Online' ? 'table-info' : 'table-success' }}">
 
+                                    <td>{{ $user->user_id }}</td>
+                                    <td>{{ $user->full_name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $class->class_id }}</td>
+                                    <td>{{ $class->class_name }}</td>
+                                    <td>
+                                        <span class="badge 
+                                            {{ $class->mode === 'Online' ? 'bg-primary' : 'bg-success' }}">
+                                            {{ $class->mode }}
+                                        </span>
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                        @endforeach
+                    </tbody>
 
                 </table>
+
             </div>
 
         </div>

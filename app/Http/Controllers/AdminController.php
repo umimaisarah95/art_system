@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\ArtClass;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,11 +15,18 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    
     public function index()
     {
         $artclasses = ArtClass::all();
         return view('admin.index', compact('artclasses'));
     }
+
+    public function dashboard()
+    {
+         return view('admin.dashboard');
+    }  
 
     /**
      * Show the form for creating a new resource.
