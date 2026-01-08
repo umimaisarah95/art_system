@@ -29,10 +29,11 @@ class AuthController extends Controller
             'age' => 'required|integer',
             'gender' => 'required|in:Male,Female',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|mconfirmed',
+            'password' => 'required|min:6|confirmed',
         ]);
 
         $data['password'] = Hash::make($data['password']);
+        $data['role'] = 'user';
 
         User::create($data);
 
@@ -48,29 +49,29 @@ class AuthController extends Controller
     }
 
     public function loginStore(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+{
+    $credentials = $request->validate([
+        'email'    => 'required|email',
+        'password' => 'required',
+    ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
 
-            // Redirect based on role//
-            if (Auth::user()->role === 'user') {
-                return redirect()->route('user.index');
-            } else {
-                return redirect()->route('admin.index');
-            }
-            
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.index');
         }
 
-        return back()->withErrors([
-            'email' => 'Wrong email or password.',
-        ]);
-
+        return redirect()->route('user.index');
     }
+
+    return back()->withErrors([
+        'email' => 'Wrong email or password.',
+    ]);
+}
+
 
     //--LOGOUT PURPOSES--//
     public function logout(Request $request)

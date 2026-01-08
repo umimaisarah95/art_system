@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\artclass;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
