@@ -18,14 +18,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 //AUTH ROUTES
 Route::get('/register', [AuthController:: class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'registerStore'])->name('register.store');
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginStore'])->name('login.store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 

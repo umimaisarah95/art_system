@@ -8,7 +8,7 @@
     <!-- PAGE TITLE -->
     <div class="mb-4 text-center">
         <h3 class="fw-bold text-white" style="font-size: 32px;">
-            Welcome Back
+            Welcome to Traditional Art Class 
         </h3>
         <p class="text-white" style="font-size: 18px;">
             Login to continue your art journey
