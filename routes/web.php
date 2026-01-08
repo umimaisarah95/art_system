@@ -41,13 +41,11 @@ Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.cre
 
 Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');
 
-Route::get('/admin/edit', [AdminController::class, 'edit'])->name('admin.edit');
+Route::get('/admin/edit/{artclass}', [AdminController::class, 'edit'])->name('admin.edit');
 
-Route::put('/admin/update', [AdminController::class, 'update'])->name('admin.update');
+Route::put('/admin/update/{artclass}', [AdminController::class, 'update'])->name('admin.update');
 
-Route::delete('/admin/destroy', [AdminController::class, 'destroy'])->name('admin.destroy');
-
-
+Route::delete('/admin/destroy/{artclass}', [AdminController::class, 'destroy'])->name('admin.destroy'); 
 Route::get('/admin/manage', function () {
     return view('admin.manage-user');
 });

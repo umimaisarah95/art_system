@@ -76,7 +76,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Dashboard</a>
+                    <a class="nav-link" href="{{ route('admin.index') }}">Dashboard</a>
                 </li>
 
                 <li class="nav-item">

@@ -64,9 +64,19 @@
                             Edit
                         </a>
 
-                        <button class="btn btn-sm btn-delete w-100">
-                            Delete
-                        </button>
+                        <form action="{{ route('admin.destroy', $artclass->class_id) }}"
+                            method="POST"
+                            class="w-100">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit"
+                                    class="btn btn-sm btn-delete w-100"
+                                    onclick="return confirm('Are you sure you want to delete this class?')">
+                                Delete
+                            </button>
+                        </form>
+
                     </div>
 
                 </div>

@@ -8,30 +8,27 @@
 
     <!-- PAGE TITLE -->
     <div class="mb-4">
-        <h3 class="fw-bold text-white fs-2">
-            Edit Art Class
-        </h3>
-        <p class="text-white fs-6 mb-0">
-            Update existing art class information
-        </p>
+        <h3 class="fw-bold text-white fs-2">Edit Art Class</h3>
+        <p class="text-white fs-6 mb-0">Update existing art class information</p>
     </div>
 
-    <!-- FORM CARD -->
     <div class="card shadow-sm border-0" style="background-color: #eeb3b3ff">
         <div class="card-body p-4">
 
-            {{-- action & method will be updated later --}}
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.update', $artclass->class_id) }}"
+                  method="POST"
+                  enctype="multipart/form-data">
                 @csrf
-                {{-- @method('PUT') --}}
+                @method('PUT')
 
                 <!-- CURRENT IMAGE -->
                 <div class="mb-4">
                     <label class="form-label fw-semibold">Current Art Image</label>
                     <div class="mb-2">
-                        <img src="https://via.placeholder.com/400x250"
+                        <img src="{{ asset('storage/' . $artclass->image_path) }}"
                              class="img-fluid rounded"
-                             alt="Current Art Image">
+                             style="max-height: 200px; object-fit: cover;"
+                             alt="Art Class Image">
                     </div>
 
                     <label class="form-label fw-semibold">Change Image (optional)</label>
@@ -44,7 +41,7 @@
                     <input type="text"
                            class="form-control"
                            name="class_name"
-                           value="Batik Painting Class"
+                           value="{{ old('class_name', $artclass->class_name) }}"
                            required>
                 </div>
 
@@ -54,17 +51,19 @@
                     <textarea class="form-control"
                               name="description"
                               rows="4"
-                              required>Learn traditional batik techniques using wax and dye.</textarea>
+                              required>{{ old('description', $artclass->description) }}</textarea>
                 </div>
 
                 <!-- ART TYPE -->
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Art Type</label>
                     <select class="form-select" name="art_type" required>
-                        <option>Batik</option>
-                        <option>Calligraphy</option>
-                        <option>Ukiran</option>
-                        <option>Anyaman</option>
+                        @foreach (['Batik','Anyaman','Calligraphy','Ukiran Kayu','Wau Bulan'] as $type)
+                            <option value="{{ $type }}"
+                                {{ old('art_type', $artclass->art_type) == $type ? 'selected' : '' }}>
+                                {{ $type }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -72,18 +71,22 @@
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Mode</label>
                     <select class="form-select" id="mode" name="mode" required>
-                        <option value="Online" selected>Online</option>
-                        <option value="Physical">Physical</option>
+                        <option value="Online" {{ old('mode', $artclass->mode) == 'Online' ? 'selected' : '' }}>
+                            Online
+                        </option>
+                        <option value="Physical" {{ old('mode', $artclass->mode) == 'Physical' ? 'selected' : '' }}>
+                            Physical
+                        </option>
                     </select>
                 </div>
 
                 <!-- LOCATION -->
-                <div class="mb-3" id="locationDiv" style="display:none;">
+                <div class="mb-3" id="locationDiv">
                     <label class="form-label fw-semibold">Location</label>
                     <input type="text"
                            class="form-control"
                            name="location"
-                           value="">
+                           value="{{ old('location', $artclass->location) }}">
                 </div>
 
                 <!-- LINK -->
@@ -92,7 +95,7 @@
                     <input type="url"
                            class="form-control"
                            name="link"
-                           value="https://meet.google.com/example">
+                           value="{{ old('link', $artclass->link) }}">
                 </div>
 
                 <!-- DURATION -->
@@ -101,7 +104,7 @@
                     <input type="number"
                            class="form-control"
                            name="duration"
-                           value="120"
+                           value="{{ old('duration', $artclass->duration) }}"
                            min="1"
                            required>
                 </div>
@@ -112,8 +115,8 @@
                         <label class="form-label fw-semibold">Class Start Date</label>
                         <input type="date"
                                class="form-control"
-                               name="class_start_date"
-                               value="2026-08-10"
+                               name="start_date"
+                               value="{{ old('start_date', $artclass->start_date) }}"
                                required>
                     </div>
 
@@ -121,8 +124,8 @@
                         <label class="form-label fw-semibold">Class End Date</label>
                         <input type="date"
                                class="form-control"
-                               name="class_end_date"
-                               value="2026-08-15"
+                               name="end_date"
+                               value="{{ old('end_date', $artclass->end_date) }}"
                                required>
                     </div>
                 </div>
@@ -130,16 +133,17 @@
                 <!-- PRICE -->
                 <div class="mb-4">
                     <label class="form-label fw-semibold">Price (RM)</label>
-                    <input type="text"
+                    <input type="number"
+                           step="0.01"
                            class="form-control"
                            name="price"
-                           value="120"
+                           value="{{ old('price', $artclass->price) }}"
                            required>
                 </div>
 
                 <!-- ACTION BUTTONS -->
                 <div class="d-flex justify-content-end">
-                    <a href="#" class="btn btn-cancel me-2">
+                    <a href="{{ route('admin.index') }}" class="btn btn-cancel me-2">
                         Cancel
                     </a>
                     <button type="submit" class="btn px-4">
@@ -168,9 +172,8 @@ function toggleMode() {
         locationDiv.style.display = 'none';
     }
 }
-
+toggleMode();
 modeSelect.addEventListener('change', toggleMode);
-toggleMode(); // run on page load
 </script>
 
 @endsection

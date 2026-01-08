@@ -91,43 +91,34 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, ArtClass $artclass)
-    {
-        $request->validate([
-            'image_path' => 'required|image|max:2048',
-            'class_name' => 'required|string',
-            'description' => 'required|string',
-            'art_type' => 'required|in:batik,anyaman,Calligraphy,Ukiran Kayu,Wau Bulan',
-            'mode' => 'required|in:Online,Physical',
-            'link' => 'nullable|string',
-            'location' => 'nullable|string',
-            'duration' => 'required|integer',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'price' => 'required|numeric',
-        ]);
+{
+    $data = $request->validate([
+        'image_path' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        'class_name' => 'required|string',
+        'description' => 'required|string',
+        'art_type' => 'required|in:Batik,Anyaman,Calligraphy,Ukiran Kayu,Wau Bulan',
+        'mode' => 'required|in:Online,Physical',
+        'link' => 'nullable|string',
+        'location' => 'nullable|string',
+        'duration' => 'required|integer',
+        'start_date' => 'required|date',
+        'end_date' => 'required|date',
+        'price' => 'required|numeric',
+    ]);
 
-        if ($request->hasFile('image_path')) {
-            $imagePath = $request->file('image_path')->store('artclass_images', 'public');
-        } else {
-            $imagePath = $artclass->image_path;
-        }
-
-        $artclass->update([
-            'image_path' => $imagePath,
-            'class_name' => $request->input('class_name'),
-            'description' => $request->input('description'),
-            'art_type' => $request->input('art_type'),
-            'mode' => $request->input('mode'),
-            'link' => $request->input('link'),
-            'location' => $request->input('location'),
-            'duration' => $request->input('duration'),
-            'start_date' => $request->input('start_date'),
-            'end_date' => $request->input('end_date'),
-            'price' => $request->input('price'),
-        ]);
-
-        return redirect()->route('admin.index')->with('success', 'Art class updated successfully.');
+    // If new image uploaded
+    if ($request->hasFile('image_path')) {
+        $data['image_path'] = $request
+            ->file('image_path')
+            ->store('artclass_images', 'public');
     }
+
+    $artclass->update($data);
+
+    return redirect()
+        ->route('admin.index')
+        ->with('success', 'Art class updated successfully.');
+}
 
     /**
      * Remove the specified resource from storage.
@@ -138,6 +129,6 @@ class AdminController extends Controller
     public function destroy(ArtClass $artclass)
     {
         $artclass->delete();
-        return redirect()->route('admin.index')->with('success', 'Art class deleted successfully.');
+        return redirect()->route('admin.index')->with('success', '1 Art class deleted successfully.');
     }
 }
