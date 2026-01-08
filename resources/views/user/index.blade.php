@@ -21,7 +21,7 @@
             interactive online and physical classes.
         </p>
 
-        <a href="#" class="btn btn-lg px-5">
+        <a href="{{ route('user.dashboard') }}" class="btn btn-lg px-5">
             Get Started →
         </a>
 
@@ -37,7 +37,10 @@
         <div class="col-md-6 mb-4">
             <div class="card card-soft p-4">
                 <h5 class="fw-bold">Available Classes</h5>
-                <p class="fs-2 mb-0">12</p>
+                <p class="fs-2 mb-0">{{ $totalClasses }}</p>
+                <a href="{{ route('user.dashboard') }}" class="btn btn-lg px-5">
+            See More
+        </a>
             </div>
         </div>
 
@@ -46,6 +49,9 @@
             <div class="card card-soft p-4">
                 <h5 class="fw-bold">My Classes</h5>
                 <p class="fs-2 mb-0">2</p>
+                <a href="#" class="btn btn-lg px-5">
+            My Classes
+        </a>
             </div>
         </div>
 

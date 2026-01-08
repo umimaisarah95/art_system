@@ -5,6 +5,7 @@ use App\Models\artclass;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,15 +29,15 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginStore'])->name('login.store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+
 //USER ROUTES
-Route::get('/user', function () {
-    return view('layouts.user');
-});
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
 
-Route::get('/user/index', function () {
-    return view('user.index');
-});
+Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
 
+Route::get('/class/{id}', [UserController::class, 'details'])->name('class.details');
+
+Route::post('/class/register/{id}', [UserController::class, 'registerClass'])->name('class.register');
 
 
 //ADMIN ROUTES
@@ -52,6 +53,5 @@ Route::get('/admin/edit/{artclass}', [AdminController::class, 'edit'])->name('ad
 Route::put('/admin/update/{artclass}', [AdminController::class, 'update'])->name('admin.update');
 
 Route::delete('/admin/destroy/{artclass}', [AdminController::class, 'destroy'])->name('admin.destroy'); 
-
 
 Route::get('/admin/manage', [AdminController::class, 'userList'])->name('admin.manage');

@@ -1,0 +1,135 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Http\Request;
+use App\Models\ArtClass;
+use App\Models\User;
+
+
+class UserController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function index()
+    {
+         $totalClasses = ArtClass::count();
+
+    return view('user.index', compact('totalClasses'));
+    }
+    public function dashboard()
+    {
+        $artclasses = ArtClass::all();
+        return view('user.dashboard', compact('artclasses'));
+    }
+
+    
+    //TO ENSURE THE DETAILS OF CERTAIN CLASS//
+    public function details($id)
+    {
+        $artclass = ArtClass::findOrFail($id);
+
+        return view('user.class-details', compact('artclass'));
+    }
+
+//when user register to certain class, it will update the pivot table!//
+    public function registerClass($id)
+    {
+        $user = Auth::user();
+
+        // prevent duplicate registration
+        if (!$user->classes()->where('artclasses.class_id', $id)->exists()) {
+            $user->classes()->attach($id);
+        }
+
+        // Simulated payment success
+        return redirect()->route('user.dashboard')
+            ->with('success', 'Payment successful. You are registered for the class!');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
