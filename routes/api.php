@@ -3,6 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AuthController;
+use App\Http\Models\ArtClass;
+use app\Http\Controllers\UserController;
+use App\Http\Controllers\Api\ApiController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/classes', [ApiController::class, 'index']);
+Route::post('/classes', [ApiController::class, 'store']);
+Route::get('/classes/{id}', [ApiController::class, 'show']);
+Route::put('/classes/{id}', [ApiController::class, 'update']);
