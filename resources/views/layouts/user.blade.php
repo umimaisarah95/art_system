@@ -96,6 +96,8 @@
             {{ Auth::user()->name }}
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="{{ route('user.profile') }}">My Account</a></li>
+                        <li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button class="dropdown-item text-danger">Logout</button>

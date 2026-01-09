@@ -144,7 +144,7 @@ class AdminController extends Controller
 
 public function userList()
 {
-    $users = User::with('classes')->get();
+    $users = User::with('classes')->where('role', 'user')->get();
 
     return view('admin.manage-user', compact('users'));
 }
