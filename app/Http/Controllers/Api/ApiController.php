@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Models\ArtClass;
+use App\Http\Controllers\Controller;
+use App\Models\ArtClass;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
