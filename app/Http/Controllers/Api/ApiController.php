@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\ArtClass;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class ApiController extends Controller
 {
@@ -15,7 +17,7 @@ class ApiController extends Controller
      */
     public function index()
     {
-        return ArtClass::all();
+        return User::all();
     }
 
     /**
@@ -27,15 +29,15 @@ class ApiController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'class_name' => 'required|string',
-            'description' => 'required|string',
-            'art_type' => 'required|string',
-            'mode' => 'required|in:Online,Physical',
-            'duration' => 'required|integer',
-            'price' => 'required|numeric',
+            'full_name'=>'required|string',
+            'age'=>'required|integer',
+            'gender'=>'required|in:Male,Female',
+            'email'=>'required|email|unique:users,email',
+            'password'=>'required|min:6',
+            'role'=> 'required|in:admin,user'
         ]);
-
-        return ArtClass::create($data);
+        $data['password'] = Hash::make($data['password']);
+        return User::create($data);
     }
 
     /**
@@ -46,7 +48,7 @@ class ApiController extends Controller
      */
     public function show($id)
     {
-        return ArtClass::findOrFail($id);
+        return User::findOrFail($id);
     }
 
     /**
@@ -58,16 +60,15 @@ class ApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $artclass = ArtClass::findOrFail($id);
+        $user = User::findOrFail($id);
 
         $data = $request->validate([
-            'class_name' => 'sometimes|string',
-            'description' => 'sometimes|string',
-            'art_type' => 'sometimes|string',
-            'mode' => 'sometimes|in:Online,Physical',
-            'duration' => 'sometimes|integer',
-            'price' => 'sometimes|numeric',
+            'full_name'=> 'sometimes|string',
+            'age'=> 'sometimes|integer',
+            'gender'=> 'sometimes|in:Male,Female',
         ]);
+
+        $user->update($data);
     }
 
     /**

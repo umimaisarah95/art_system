@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('artclasses', function (Blueprint $table) {
             $table->id('class_id');
-            $table->string('image_path');
+            $table->string('image_path')->nullable();
             $table->string('class_name');
             $table->text('description');
             $table->enum('art_type', ['Batik', 'Anyaman', 'Calligraphy', 'Ukiran Kayu', 'Wau Bulan']);

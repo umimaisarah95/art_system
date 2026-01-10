@@ -71,7 +71,7 @@ class UserController extends Controller
         }
 
         // Simulated payment success
-        return redirect()->route('user.dashboard')
+        return redirect()->route('user.myclasses')
             ->with('success', 'Payment successful. You are registered for the class!');
     }
 
